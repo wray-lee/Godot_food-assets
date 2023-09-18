@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=3 uid="uid://bu31xp1i0213l"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_cahac"]
+[ext_resource type="Texture2D" uid="uid://bthcor517h00c" path="res://art/pB1P22xg/run_0.png" id="2_3h07k"]
+[ext_resource type="Texture2D" uid="uid://c4b6hipfsyeq4" path="res://art/pB1P22xg/idle_0.png" id="2_iupq0"]
+[ext_resource type="Texture2D" uid="uid://pl7wqo7t2omq" path="res://art/pB1P22xg/idle_1.png" id="3_73rnj"]
+[ext_resource type="Texture2D" uid="uid://cc6u3p08nrb0l" path="res://art/pB1P22xg/run_1.png" id="3_v5qb2"]
+[ext_resource type="Texture2D" uid="uid://cux2hebnnlvi6" path="res://art/pB1P22xg/run_2.png" id="4_6sune"]
+[ext_resource type="Texture2D" uid="uid://yom0dqho3yaj" path="res://art/pB1P22xg/idle_2.png" id="4_ycsup"]
+[ext_resource type="Texture2D" uid="uid://ngsa8y1tnbr7" path="res://art/pB1P22xg/run_3.png" id="5_m0esg"]
+[ext_resource type="Texture2D" uid="uid://2eikemg68bek" path="res://art/pB1P22xg/idle_3.png" id="5_pqxnx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8dpqe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iupq0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_73rnj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ycsup")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pqxnx")
+}],
+"loop": true,
+"name": &"stand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3h07k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_v5qb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6sune")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_m0esg")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y1ax8"]
+radius = 27.0
+height = 66.0
+
+[node name="Player" type="Area2D"]
+position = Vector2(241, 359)
+script = ExtResource("1_cahac")
+metadata/_edit_group_ = true
+
+[node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_8dpqe")
+animation = &"stand"
+frame_progress = 0.170602
+
+[node name="CollisionPlayer" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20)
+shape = SubResource("CapsuleShape2D_y1ax8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://w30mva1jr2ld"]
+
+[ext_resource type="Script" path="res://Mob.gd" id="1_xuohp"]
+[ext_resource type="Texture2D" uid="uid://drxbwdds26y5v" path="res://art/enemy/burger.png" id="2_i8bwm"]
+[ext_resource type="Texture2D" uid="uid://xlx8u25smw6k" path="res://art/enemy/burger3.png" id="3_37cqk"]
+[ext_resource type="Texture2D" uid="uid://ueqkmrroay4a" path="res://art/enemy/burger2.png" id="4_kgg5i"]
+[ext_resource type="Texture2D" uid="uid://d0mbwrfgyj425" path="res://art/enemy/donut.png" id="5_qe7wv"]
+[ext_resource type="Texture2D" uid="uid://bdx8p3bdf2gpf" path="res://art/enemy/donut2.png" id="6_5w305"]
+[ext_resource type="Texture2D" uid="uid://bgagqm1nyi127" path="res://art/enemy/donut3.png" id="7_n0h4n"]
+[ext_resource type="Texture2D" uid="uid://cnkk05laibymn" path="res://art/enemy/sandwich.png" id="8_fulgr"]
+[ext_resource type="Texture2D" uid="uid://cg6tfparsn06g" path="res://art/enemy/sandwich2.png" id="9_kwcuf"]
+[ext_resource type="Texture2D" uid="uid://cd0mx03d2flqi" path="res://art/enemy/sandwich3.png" id="10_0p5bm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rqtso"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i8bwm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_37cqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kgg5i")
+}],
+"loop": true,
+"name": &"burger",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qe7wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5w305")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_n0h4n")
+}],
+"loop": true,
+"name": &"donut",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_fulgr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_kwcuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_0p5bm")
+}],
+"loop": true,
+"name": &"sandwich",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cparr"]
+radius = 31.0
+height = 106.0
+
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_xuohp")
+metadata/_edit_group_ = true
+
+[node name="AnimatedMob" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rqtso")
+animation = &"donut"
+
+[node name="CollisionShapeMob" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_cparr")
+
+[node name="VisibleOnScreenNotifierMob" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifierMob" to="." method="_on_visible_on_screen_notifier_mob_screen_exited"]
